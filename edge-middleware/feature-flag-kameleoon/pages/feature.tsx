@@ -1,10 +1,10 @@
 import { Layout, Text, Page } from '@vercel/examples-ui'
 
-function Home() {
+function Feature() {
   return (
     <Page className="flex flex-col gap-12">
       <section className="flex flex-col gap-6">
-        <Text variant="h1">HOME PAGE</Text>
+        <Text variant="h1">FEATURE PAGE</Text>
         <Text>
           This example shows how to Lorem ipsum dolor sit amet consectetur
           adipisicing elit. Voluptas eligendi aliquam officiis aliquid neque
@@ -16,6 +16,6 @@ function Home() {
   )
 }
 
-Home.Layout = Layout
+Feature.Layout = Layout
 
-export default Home
+export default Feature
