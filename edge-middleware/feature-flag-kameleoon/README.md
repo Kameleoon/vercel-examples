@@ -86,5 +86,5 @@ In this section, we will create a targeted rule with variation `On`.
 2. We don't change anything except `Variation to serve` to `On` and exposition to `50%`.
    ![targeted delivery rule](docs/targeted-rule.png)
 3. Save it
-4. Lastly, turn on the feature flag to apply the falg rule.
+4. Lastly, enable the feature flag to apply the flag rule.
    ![toggle on](docs/toggle.png)
