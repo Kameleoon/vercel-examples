@@ -3,25 +3,14 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import clientConfiguration from './lib/kameleoon/client-configuration.json'
 
-// KameleoonClient accepts siteCode parameter whose type is only string
-// Since the process.env.KAMELEOON_SITE_CODE returns by default string | undefined types
-// This declaration sets only string type to process.env.KAMELEOON_SITE_CODE
-declare global {
-  namespace NodeJS {
-    interface ProcessEnv {
-      KAMELEOON_SITE_CODE: string
-    }
-  }
-}
-
 const KAMELEOON_USER_ID = 'kameleoon_user_id'
 
 // Replace it with your featureKey from Kameleoon Platform
-const FEATURE_KEY = 'YOUR_FEATURE_KEY'
+const FEATURE_KEY = 'new_home_page'
 
 // On these paths the current middleware will be invoked
 export const config = {
-  matcher: ['/', '/feature'],
+  matcher: ['/', '/new-home-page'],
 }
 
 export default async function middleware(req: NextRequest) {
@@ -30,9 +19,10 @@ export default async function middleware(req: NextRequest) {
   const visitorCode =
     req.cookies.get(KAMELEOON_USER_ID)?.value || crypto.randomUUID()
 
-  // Create KameleoonClient instance using clientConfiguration downloaded at build time
+  // Create KameleoonClient instance using `clientConfiguration` downloaded at build time
+  // It is fetched at build time to avoid doing a fetching at the edge.
   const kameleoonClient = new KameleoonClient({
-    siteCode: process.env.KAMELEOON_SITE_CODE,
+    siteCode: process.env.KAMELEOON_SITE_CODE!,
     integrations: {
       externalClientConfiguration: JSON.parse(
         JSON.stringify(clientConfiguration)
@@ -48,16 +38,26 @@ export default async function middleware(req: NextRequest) {
     visitorCode,
     FEATURE_KEY
   )
+  // Returns a variable for the visitor under visitorCode in the found feature flag
+  const homePageVariable = kameleoonClient.getFeatureFlagVariable({
+    visitorCode,
+    featureKey: FEATURE_KEY,
+    variableKey: 'home_page',
+  })
 
   console.log(
     `[KAMELEOON] Feature flag with '${FEATURE_KEY}' feature key is '${
       isFeatureActive ? 'active' : 'inactive'
     }'`
   )
+  console.log(
+    `[KAMELEOON] Feature flag with '${FEATURE_KEY}' feature key has '${homePageVariable.value}' variable`
+  )
 
-  // Rewriting the path based on `isFeatureActive` boolean
-  // If the value is true, it returns `feature` path
-  req.nextUrl.pathname = isFeatureActive ? '/feature' : '/'
+  // Rewriting the path based on `homePageVariable` value
+  // If the value is `old_version`, it returns `/` path, otherwise `/new-home-page`
+  req.nextUrl.pathname =
+    homePageVariable.value !== 'old_version' ? '/' : '/new-home-page'
   const response = NextResponse.rewrite(req.nextUrl)
 
   if (!req.cookies.has(KAMELEOON_USER_ID)) {

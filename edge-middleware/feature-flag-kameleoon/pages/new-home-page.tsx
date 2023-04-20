@@ -1,15 +1,15 @@
 import { Layout, Text, Page } from '@vercel/examples-ui'
 import Explanation from '../components/explanation'
 
-function Home() {
+function NewHomePage() {
   return (
     <Page className="flex flex-col gap-12">
       <section className="flex flex-col gap-6">
-        <Text variant="h1">HOME PAGE</Text>
-        <Text>This page is the default version of HOME PAGE.</Text>
+        <Text variant="h1">NEW VERSION OF HOME PAGE</Text>
+        <Text>This page is the new version of HOME PAGE</Text>
         <Text>
-          You are seeing this old version, because feature flag with&nbsp;
-          <b>new_home_page</b> feature key is disabled or you are not targeted.
+          You are seeing this new version, because feature flag with &nbsp;
+          <b>new_home_page</b> feature key is enabled and you are targeted.
         </Text>
       </section>
       <section className="flex flex-col gap-6">
@@ -19,6 +19,6 @@ function Home() {
   )
 }
 
-Home.Layout = Layout
+NewHomePage.Layout = Layout
 
-export default Home
+export default NewHomePage
