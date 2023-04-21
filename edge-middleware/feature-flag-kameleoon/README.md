@@ -13,7 +13,7 @@ demoUrl: https://feature-flag-kameleoon.vercel.app
 
 ## Demo
 
-https://feature-flag-kameleoon.vercel.
+https://feature-flag-kameleoon.vercel.app
 
 ## How to Use
 
