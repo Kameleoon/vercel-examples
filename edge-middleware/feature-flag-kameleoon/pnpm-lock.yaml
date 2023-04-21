@@ -8,7 +8,7 @@ dependencies:
     specifier: ^1.0.5
     version: 1.0.5(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
   next:
-    specifier: ^13.3.0
+    specifier: ^13.2.4
     version: 13.3.0(react-dom@18.2.0)(react@18.2.0)
   node-fetch:
     specifier: ^3.3.1
@@ -22,31 +22,31 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: ^18.15.13
+    specifier: ^18.15.5
     version: 18.15.13
   '@types/react':
-    specifier: ^18.0.37
+    specifier: ^18.0.28
     version: 18.0.37
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.23)
   eslint:
-    specifier: ^8.38.0
+    specifier: ^8.36.0
     version: 8.38.0
   eslint-config-next:
-    specifier: ^13.3.0
+    specifier: ^13.2.4
     version: 13.3.0(eslint@8.38.0)(typescript@5.0.4)
   postcss:
-    specifier: ^8.4.23
+    specifier: ^8.4.21
     version: 8.4.23
   tailwindcss:
-    specifier: ^3.3.1
+    specifier: ^3.2.7
     version: 3.3.1(postcss@8.4.23)
   turbo:
-    specifier: ^1.9.3
+    specifier: ^1.8.5
     version: 1.9.3
   typescript:
-    specifier: ^5.0.4
+    specifier: ^5.0.2
     version: 5.0.4
 
 packages:
